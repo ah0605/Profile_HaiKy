@@ -200,7 +200,7 @@ main{ padding:20px 0; }
 
 .badge img{
   width:100%;
-  height:auto;
+  height:300;
   object-fit:cover;
   border-radius:8px;
   display:block;
