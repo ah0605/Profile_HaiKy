@@ -208,7 +208,7 @@ main{ padding:20px 0; }
 .badge-list1{
   display:grid;
   grid-template-columns:repeat(2, 1fr);  
-  gap:16px;
+  gap: 30px;
 }
 .badge1{
   background:#ffffffd9;
@@ -218,7 +218,7 @@ main{ padding:20px 0; }
   text-align:center;
 }
 .badge1 img{
-  width: 120%;
+  width: 125%;
   height: 300px;
   object-fit:cover;
   border-radius:8px;
