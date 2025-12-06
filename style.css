@@ -170,11 +170,19 @@ main{ padding:20px 0; }
 }
 
 .role-desc ul,
-.role-sample ul{
+.role-sample ul,
+.role ul{
   padding-left:18px;
 }
 
 .role-sample .cta-box{
+  background:#fff7f6;
+  padding:10px;
+  border-radius:8px;
+  border:1px solid rgba(200,143,163,0.08);
+  margin-top:10px;
+}
+.role .cta-box{
   background:#fff7f6;
   padding:10px;
   border-radius:8px;
@@ -207,7 +215,7 @@ main{ padding:20px 0; }
 }
 .badge-list1{
   display:grid;
-  grid-template-columns:repeat(2, 1fr);  
+  grid-template-columns:repeat(3, 1fr);  
   gap: 30px;
 }
 .badge1{
