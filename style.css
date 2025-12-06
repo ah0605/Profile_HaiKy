@@ -205,6 +205,11 @@ main{ padding:20px 0; }
   display:block;
   margin-bottom:6px;
 }
+.badge-list1{
+  display:grid;
+  grid-template-columns:repeat(2, 1fr);  
+  gap:16px;
+}
 .badge1{
   background:#ffffffd9;
   padding:10px;
@@ -213,8 +218,8 @@ main{ padding:20px 0; }
   text-align:center;
 }
 .badge1 img{
-  width:202px;
-  height:129px;
+  width: 120%px;
+  height: 300px;
   object-fit:cover;
   border-radius:8px;
   display:block;
