@@ -299,3 +299,8 @@ button.btn-primary{
   }
 }
 
+@media (max-width: 600px) {
+  .badge-list1 {
+    grid-template-columns: 1fr !important;
+  }
+}
