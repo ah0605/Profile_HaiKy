@@ -1,0 +1,277 @@
+
+:root{
+  --pastel-bg: #fbf7f3;
+  --pastel-card: #fff8f5;
+  --pastel-accent: #c88fa3;
+  --pastel-accent-2: #9fb7b9;
+  --text-dark: #2f2f2f;
+  --muted: #7d7d7d;
+
+  --container: 1280px;
+  --radius: 12px;
+  --font-base: 16px;
+  --line-mult: 1.55;
+  --space-card: 18px;
+  --avatar-size: 150px;
+}
+
+*{ box-sizing:border-box; margin:0; padding:0; }
+html, body{ height:100%; }
+
+body{
+  font-family:"Segoe UI", Roboto, Arial, sans-serif;
+  background:var(--pastel-bg);
+  color:var(--text-dark);
+  font-size:var(--font-base);
+  line-height:var(--line-mult);
+}
+
+
+.container{
+  max-width:var(--container);
+  margin:0 auto;
+  padding:0 16px;
+}
+
+
+.site-header{
+  background:rgba(248,241,239,0.95);
+  padding:26px 0 30px;
+  border-bottom:1px solid rgba(0,0,0,0.04);
+}
+
+.nav-row{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+}
+
+.brand{
+  font-weight:700;
+  font-size:1.25rem;
+}
+
+.main-nav a{
+  color:var(--text-dark);
+  text-decoration:none;
+  margin-left:18px;
+  opacity:.9;
+  transition:.2s;
+}
+.main-nav a:hover{ opacity:1; }
+
+
+.hero{
+  display:flex;
+  gap:28px;
+  margin-top:20px;
+  align-items:center;
+}
+
+.hero-left{ flex:1; }
+
+.hero-left h1{
+  font-size:2rem;
+  margin-bottom:6px;
+}
+
+.lead{
+  margin-bottom:12px;
+  color:var(--muted);
+}
+
+.btn-primary{
+  display:inline-block;
+  background:var(--pastel-accent);
+  color:#fff;
+  padding:10px 16px;
+  border-radius:10px;
+  text-decoration:none;
+  font-weight:700;
+  box-shadow:0 4px 14px rgba(168,120,132,0.18);
+  transition:.22s;
+}
+.btn-primary:hover{
+  transform:translateY(-2px);
+  box-shadow:0 8px 22px rgba(168,120,132,0.2);
+}
+
+
+.hero-right{
+  width:420px;
+  background:rgba(255,255,255,0.9);
+  padding:16px;
+  border-radius:12px;
+  text-align:center;
+  border:1px solid rgba(0,0,0,0.04);
+  flex-shrink:0;
+}
+
+.avatar{
+  width:var(--avatar-size);
+  height:var(--avatar-size);
+  border-radius:60%;
+  object-fit:cover;
+  border:6px solid rgba(255,255,255,0.85);
+  box-shadow:0 8px 20px rgba(160,130,140,0.06);
+}
+
+.name{
+  font-weight:700;
+  margin-top:10px;
+}
+
+.meta{
+  color:var(--muted);
+  margin-top:4px;
+  font-size:0.95rem;
+}
+
+.quick-contact a{
+  color:var(--pastel-accent);
+  text-decoration:underline;
+}
+
+
+main{ padding:20px 0; }
+
+.card{
+  background:var(--pastel-card);
+  border-radius:var(--radius);
+  padding:var(--space-card);
+  box-shadow:0 4px 26px rgba(64,48,48,0.05);
+  margin-bottom:20px;
+}
+
+.intro-card .intro-text{ margin-bottom:12px; }
+
+
+.intro-grid{
+  display:grid;
+  grid-template-columns:1fr;
+  gap:16px;
+}
+.intro-grid ul{ padding-left:18px; }
+
+
+.role-card h2{ margin-top:0; }
+.muted{ color:var(--muted); }
+
+.subrole{
+  margin-top:16px;
+  padding-top:14px;
+  border-top:1px dashed rgba(0,0,0,0.06);
+}
+
+.role-grid{
+  display:grid;
+  grid-template-columns:1fr;
+  gap:20px;
+}
+
+.role-desc ul,
+.role-sample ul{
+  padding-left:18px;
+}
+
+.role-sample .cta-box{
+  background:#fff7f6;
+  padding:10px;
+  border-radius:8px;
+  border:1px solid rgba(200,143,163,0.08);
+  margin-top:10px;
+}
+
+
+.badge-list{
+  display:grid;
+  grid-template-columns:repeat(3, 1fr);  
+  gap:16px;
+}
+
+.badge{
+  background:#ffffffd9;
+  padding:10px;
+  border-radius:10px;
+  border:1px solid rgba(0,0,0,0.03);
+  text-align:center;
+}
+
+.badge img{
+  width:100%;
+  height:300px;
+  object-fit:cover;
+  border-radius:8px;
+  display:block;
+  margin-bottom:6px;
+}
+
+
+.portfolio-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit, minmax(300px, 1fr));
+  gap:16px;
+}
+
+
+.mini-card{
+  background:#fffaf9;
+  padding:12px;
+  border-radius:10px;
+}
+
+
+.form-row{
+  display:flex;
+  gap:10px;
+}
+.form-row input{ flex:1; }
+
+input[type="text"],
+input[type="email"],
+textarea{
+  width:100%;
+  padding:10px;
+  border-radius:8px;
+  border:1px solid rgba(0,0,0,0.07);
+  background:transparent;
+  font-size:0.95rem;
+}
+
+button.btn-primary{
+  border:0;
+  cursor:pointer;
+}
+
+
+.site-footer{
+  text-align:center;
+  padding:14px 0;
+  font-size:14px;
+  color:var(--muted);
+}
+
+
+@media (max-width:900px){
+  .hero{
+    flex-direction:column;
+    align-items:flex-start;
+  }
+  .hero-right{ width:100%; }
+
+  .role-grid,
+  .intro-grid,
+  .portfolio-grid{
+    grid-template-columns:1fr;
+  }
+
+  
+  .badge-list{
+    grid-template-columns:1fr;
+  }
+
+  .form-row{
+    flex-direction:column;
+  }
+}
+
