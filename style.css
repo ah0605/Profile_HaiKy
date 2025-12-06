@@ -205,7 +205,14 @@ main{ padding:20px 0; }
   display:block;
   margin-bottom:6px;
 }
-
+.badge1 img{
+  width:150%;
+  height:300px;
+  object-fit:cover;
+  border-radius:8px;
+  display:block;
+  margin-bottom:6px;
+}
 
 .portfolio-grid{
   display:grid;
