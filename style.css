@@ -293,14 +293,11 @@ button.btn-primary{
   .badge-list{
     grid-template-columns:1fr;
   }
-
+  .badge-list1 {
+    grid-template-columns: 1fr ;
+  }
   .form-row{
     flex-direction:column;
   }
 }
 
-@media (max-width: 600px) {
-  .badge-list1 {
-    grid-template-columns: 1fr !important;
-  }
-}
