@@ -8,25 +8,9 @@ document.querySelectorAll('.main-nav a').forEach(a=>{
   });
 });
 
-// Xử lý form (demo) - bạn thay bằng fetch tới endpoint thật nếu cần
-const form = document.getElementById('contactForm');
-if(form){
-  form.addEventListener('submit', e=>{
-    e.preventDefault();
-    const data = new FormData(form);
-    alert(
-      'Yêu cầu đã được ghi nhận (demo):\n' +
-      'Họ tên: ' + data.get('name') + '\n' +
-      'Email: ' + data.get('email') + '\n' +
-      'Số ĐT: ' + (data.get('phone')||'') + '\n' +
-      'Yêu cầu: ' + (data.get('role')||'') + '\n' +
-      'Mô tả: ' + (data.get('message')||'')
-    );
-    form.reset();
-  });
-}
 
-/* ---------- Mobile settings logic (giữ nguyên) ---------- */
+
+
 const mobileBtn = document.getElementById('mobileSettingsBtn');
 const panel = document.getElementById('mobileSettingsPanel');
 const closeBtn = document.getElementById('closeSettings');
@@ -63,31 +47,7 @@ function applySettings(settings){
   if(settings.dark) b.classList.add('dark');
 }
 
-function initSettingsUI(){
-  const saved = loadSettings() || defaultSettings;
-  if(fontSizeSelect) fontSizeSelect.value = saved.fontSize || 'normal';
-  if(spacingSelect) spacingSelect.value = saved.spacing || 'normal';
-  if(avatarSizeSelect) avatarSizeSelect.value = saved.avatar || 'normal';
-  if(darkModeToggle) darkModeToggle.checked = !!saved.dark;
-  applySettings(saved);
-}
 
-fontSizeSelect && fontSizeSelect.addEventListener('change', ()=>{
-  const s = loadSettings() || defaultSettings; s.fontSize = fontSizeSelect.value; saveSettings(s); applySettings(s);
-});
-spacingSelect && spacingSelect.addEventListener('change', ()=>{
-  const s = loadSettings() || defaultSettings; s.spacing = spacingSelect.value; saveSettings(s); applySettings(s);
-});
-avatarSizeSelect && avatarSizeSelect.addEventListener('change', ()=>{
-  const s = loadSettings() || defaultSettings; s.avatar = avatarSizeSelect.value; saveSettings(s); applySettings(s);
-});
-darkModeToggle && darkModeToggle.addEventListener('change', ()=>{
-  const s = loadSettings() || defaultSettings; s.dark = !!darkModeToggle.checked; saveSettings(s); applySettings(s);
-});
-
-resetBtn && resetBtn.addEventListener('click', ()=>{
-  saveSettings(defaultSettings); initSettingsUI();
-});
 
 function handleResponsiveBtn(){
   if(window.innerWidth <= 820){
