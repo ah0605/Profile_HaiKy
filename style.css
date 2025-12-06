@@ -205,6 +205,13 @@ main{ padding:20px 0; }
   display:block;
   margin-bottom:6px;
 }
+.badge1{
+  background:#ffffffd9;
+  padding:10px;
+  border-radius:10px;
+  border:1px solid rgba(0,0,0,0.03);
+  text-align:center;
+}
 .badge1 img{
   width:110%;
   height:300px;
