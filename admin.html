@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin — MC Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Montserrat:wght@600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/admin.css">
+</head>
+<body class="admin-body">
+
+<!-- LOGIN SCREEN -->
+<div id="login-screen" class="login-screen">
+  <div class="login-card">
+    <div class="login-logo">MC<span>•</span>ADMIN</div>
+    <p class="login-sub">Đăng nhập bằng tài khoản quản trị duy nhất để chỉnh sửa nội dung website.</p>
+    <form id="login-form">
+      <div class="field"><label>Email</label><input type="email" id="login-email" required autocomplete="username"></div>
+      <div class="field"><label>Mật khẩu</label><input type="password" id="login-password" required autocomplete="current-password"></div>
+      <button type="submit" class="btn btn-primary" style="width:100%;justify-content:center">Đăng nhập</button>
+      <div class="form-msg" id="login-msg"></div>
+    </form>
+    <a href="index.html" class="login-back">← Về trang chủ</a>
+  </div>
+</div>
+
+<!-- DASHBOARD -->
+<div id="dashboard" class="dashboard" style="display:none">
+  <aside class="admin-sidebar">
+    <div class="admin-logo">MC<span>•</span>ADMIN</div>
+    <nav class="admin-nav">
+      <button class="admin-nav-btn active" data-panel="panel-dashboard">Dashboard</button>
+      <button class="admin-nav-btn" data-panel="panel-banner">Banner</button>
+      <button class="admin-nav-btn" data-panel="panel-about">Giới thiệu</button>
+      <button class="admin-nav-btn" data-panel="panel-stats">Kinh nghiệm (số liệu)</button>
+      <button class="admin-nav-btn" data-panel="panel-style">Phong cách</button>
+      <button class="admin-nav-btn" data-panel="panel-strengths">Điểm mạnh</button>
+      <button class="admin-nav-btn" data-panel="panel-gallery">Hình ảnh</button>
+      <button class="admin-nav-btn" data-panel="panel-videos">Video</button>
+      <button class="admin-nav-btn" data-panel="panel-services">Dịch vụ</button>
+      <button class="admin-nav-btn" data-panel="panel-guidecard">Thẻ hướng dẫn</button>
+      <button class="admin-nav-btn" data-panel="panel-partners">Đối tác</button>
+      <button class="admin-nav-btn" data-panel="panel-testimonials">Đánh giá</button>
+      <button class="admin-nav-btn" data-panel="panel-contact">Liên hệ</button>
+      <button class="admin-nav-btn" data-panel="panel-messages">Tin nhắn khách</button>
+    </nav>
+    <button class="admin-logout" id="logout-btn">Đăng xuất</button>
+  </aside>
+
+  <main class="admin-main">
+    <header class="admin-topbar">
+      <div>
+        <div class="admin-topbar-title" id="panel-title">Dashboard</div>
+        <div class="admin-topbar-sub" id="current-user-email"></div>
+      </div>
+      <a href="index.html" target="_blank" class="btn btn-sm btn-dark">Xem trang chủ ↗</a>
+    </header>
+
+    <div class="admin-content">
+
+      <!-- DASHBOARD -->
+      <section class="admin-panel active" id="panel-dashboard">
+        <div class="admin-stat-grid">
+          <div class="admin-stat-box"><div class="asb-num" id="count-gallery">0</div><div class="asb-label">Tổng số ảnh</div></div>
+          <div class="admin-stat-box"><div class="asb-num" id="count-videos">0</div><div class="asb-label">Tổng số video</div></div>
+          <div class="admin-stat-box"><div class="asb-num" id="count-partners">0</div><div class="asb-label">Tổng số đối tác</div></div>
+          <div class="admin-stat-box"><div class="asb-num" id="count-services">0</div><div class="asb-label">Tổng số dịch vụ</div></div>
+          <div class="admin-stat-box"><div class="asb-num" id="count-messages">0</div><div class="asb-label">Tin nhắn liên hệ</div></div>
+        </div>
+        <p class="admin-hint">Chào mừng bạn quay lại! Chọn một mục ở thanh bên trái để chỉnh sửa nội dung website.</p>
+        <div class="admin-hint" style="margin-top:14px;display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap">
+          <span>Nhập nhanh nội dung giới thiệu, phong cách, điểm mạnh, dịch vụ và liên hệ của <b>Hải Kỳ</b> (chỉ điền vào phần đang trống, không ghi đè phần bạn đã có).</span>
+          <button class="btn btn-dark btn-sm" id="btn-seed-data">Nhập dữ liệu mẫu</button>
+        </div>
+        <div class="form-msg" id="seed-msg" style="margin-top:8px"></div>
+      </section>
+
+      <!-- BANNER -->
+      <section class="admin-panel" id="panel-banner">
+        <form class="admin-form" id="form-banner">
+          <div class="form-row">
+            <div class="field"><label>Tên MC hiển thị ở Banner</label><input type="text" id="b-heroName"></div>
+            <div class="field"><label>Nghề nghiệp / vai trò</label><input type="text" id="b-heroRole" placeholder="MC - HƯỚNG DẪN VIÊN"></div>
+          </div>
+          <div class="field"><label>Câu slogan (tagline)</label><input type="text" id="b-heroTagline" placeholder="Năng động • Chuyên nghiệp • Truyền cảm hứng"></div>
+          <div class="field"><label>Mô tả ngắn</label><textarea id="b-heroDesc"></textarea></div>
+          <div class="form-row">
+            <div class="field"><label>Link ảnh đại diện (avatar) Banner</label><input type="url" id="b-avatarFile" placeholder="https://res.cloudinary.com/..."><div class="upload-preview" id="b-avatarPreview"></div></div>
+            <div class="field"><label>Link ảnh/video nền Banner</label><input type="url" id="b-bgFile" placeholder="https://res.cloudinary.com/..."><div class="upload-preview" id="b-bgPreview"></div></div>
+          </div>
+          <button type="submit" class="btn btn-primary">Lưu Banner</button>
+          <div class="form-msg" id="b-msg"></div>
+        </form>
+      </section>
+
+      <!-- ABOUT -->
+      <section class="admin-panel" id="panel-about">
+        <form class="admin-form" id="form-about">
+          <div class="form-row">
+            <div class="field"><label>Họ và tên</label><input type="text" id="a-fullName"></div>
+            <div class="field"><label>Tiêu đề giới thiệu</label><input type="text" id="a-headline"></div>
+          </div>
+          <div class="field"><label>Link ảnh đại diện (Giới thiệu)</label><input type="url" id="a-avatarFile" placeholder="https://res.cloudinary.com/..."><div class="upload-preview" id="a-avatarPreview"></div></div>
+          <div class="field"><label>Nội dung giới thiệu (mỗi dòng là 1 đoạn)</label><textarea id="a-bio" style="min-height:160px"></textarea></div>
+          <div class="form-row">
+            <div class="field"><label>Kinh nghiệm</label><input type="text" id="a-experience" placeholder="5 năm MC · từ 2018 HDV"></div>
+            <div class="field"><label>Phong cách</label><input type="text" id="a-style" placeholder="Linh hoạt, năng lượng cao"></div>
+          </div>
+          <div class="form-row">
+            <div class="field"><label>Điểm mạnh</label><input type="text" id="a-strength" placeholder="Xử lý tình huống, hoạt náo"></div>
+            <div class="field"><label>Ngôn ngữ</label><input type="text" id="a-language" placeholder="Tiếng Việt, Tiếng Anh"></div>
+          </div>
+          <p class="admin-hint">Mạng xã hội (Facebook / TikTok / YouTube / Zalo) — chỉnh ở mục <b>Liên hệ</b>, sẽ tự hiển thị tại đây.</p>
+          <button type="submit" class="btn btn-primary">Lưu Giới thiệu</button>
+          <div class="form-msg" id="a-msg"></div>
+        </form>
+      </section>
+
+      <!-- STATS -->
+      <section class="admin-panel" id="panel-stats">
+        <div class="admin-panel-head">
+          <p>Thêm các số liệu dạng đếm (VD: "350+ chương trình", "200+ khách hàng").</p>
+          <button class="btn btn-primary btn-sm" id="btn-add-stat">+ Thêm số liệu</button>
+        </div>
+        <div class="admin-list" id="list-stats"></div>
+      </section>
+
+      <!-- STYLE CARDS -->
+      <section class="admin-panel" id="panel-style">
+        <div class="admin-panel-head">
+          <p>Các thẻ mô tả phong cách dẫn (VD: Trẻ trung, Năng động, Chuyên nghiệp...).</p>
+          <button class="btn btn-primary btn-sm" id="btn-add-style">+ Thêm thẻ</button>
+        </div>
+        <div class="admin-list" id="list-style"></div>
+      </section>
+
+      <!-- STRENGTHS -->
+      <section class="admin-panel" id="panel-strengths">
+        <div class="admin-panel-head">
+          <p>Các điểm mạnh nổi bật (VD: Dẫn chương trình, Hoạt náo, Xử lý tình huống...).</p>
+          <button class="btn btn-primary btn-sm" id="btn-add-strength">+ Thêm điểm mạnh</button>
+        </div>
+        <div class="admin-list" id="list-strengths"></div>
+      </section>
+
+      <!-- GALLERY -->
+      <section class="admin-panel" id="panel-gallery">
+        <div class="admin-panel-head">
+          <p>Dán link ảnh (từ Cloudinary/ImgBB...), chọn danh mục & mô tả.</p>
+          <button class="btn btn-primary btn-sm" id="btn-add-photo">+ Thêm ảnh</button>
+        </div>
+        <div class="admin-grid-list" id="list-gallery"></div>
+      </section>
+
+      <!-- VIDEOS -->
+      <section class="admin-panel" id="panel-videos">
+        <div class="admin-panel-head">
+          <p>Thêm video bằng link YouTube (khuyên dùng) hoặc dán link video từ Cloudinary.</p>
+          <button class="btn btn-primary btn-sm" id="btn-add-video">+ Thêm video</button>
+        </div>
+        <div class="admin-list" id="list-videos"></div>
+      </section>
+
+      <!-- SERVICES -->
+      <section class="admin-panel" id="panel-services">
+        <div class="admin-panel-head">
+          <p>Danh sách dịch vụ cung cấp (MC Gala, HDV nội địa, Lửa trại...).</p>
+          <button class="btn btn-primary btn-sm" id="btn-add-service">+ Thêm dịch vụ</button>
+        </div>
+        <div class="admin-list" id="list-services"></div>
+      </section>
+
+      <!-- GUIDE CARDS (trong nước + quốc tế) -->
+      <section class="admin-panel" id="panel-guidecard">
+        <div class="admin-panel-head">
+          <p>Quản lý thẻ hướng dẫn viên — thường có 2 thẻ: trong nước và quốc tế.</p>
+          <button class="btn btn-primary btn-sm" id="btn-add-guidecard">+ Thêm thẻ</button>
+        </div>
+        <div class="admin-list" id="list-guidecards"></div>
+      </section>
+
+      <!-- PARTNERS -->
+      <section class="admin-panel" id="panel-partners">
+        <div class="admin-panel-head">
+          <p>Dán link logo (từ Cloudinary/ImgBB...), hiển thị dạng slider tự chạy ở trang chủ.</p>
+          <button class="btn btn-primary btn-sm" id="btn-add-partner">+ Thêm đối tác</button>
+        </div>
+        <div class="admin-grid-list" id="list-partners"></div>
+      </section>
+
+      <!-- TESTIMONIALS -->
+      <section class="admin-panel" id="panel-testimonials">
+        <div class="admin-panel-head">
+          <p>Đánh giá / phản hồi từ khách hàng.</p>
+          <button class="btn btn-primary btn-sm" id="btn-add-testi">+ Thêm đánh giá</button>
+        </div>
+        <div class="admin-list" id="list-testimonials"></div>
+      </section>
+
+      <!-- CONTACT -->
+      <section class="admin-panel" id="panel-contact">
+        <form class="admin-form" id="form-contact">
+          <div class="form-row">
+            <div class="field"><label>Điện thoại</label><input type="text" id="c-phone"></div>
+            <div class="field"><label>Email</label><input type="email" id="c-email"></div>
+          </div>
+          <div class="field"><label>Địa chỉ</label><input type="text" id="c-address"></div>
+          <div class="field"><label>Link nhúng Google Maps (URL src của iframe embed)</label><input type="text" id="c-mapEmbedUrl" placeholder="https://www.google.com/maps?q=...&output=embed"></div>
+          <div class="form-row">
+            <div class="field"><label>Facebook</label><input type="text" id="c-facebook"></div>
+            <div class="field"><label>TikTok</label><input type="text" id="c-tiktok"></div>
+          </div>
+          <div class="form-row">
+            <div class="field"><label>YouTube</label><input type="text" id="c-youtube"></div>
+            <div class="field"><label>Zalo</label><input type="text" id="c-zalo"></div>
+          </div>
+          <button type="submit" class="btn btn-primary">Lưu Liên hệ</button>
+          <div class="form-msg" id="c-msg"></div>
+        </form>
+      </section>
+
+      <!-- MESSAGES -->
+      <section class="admin-panel" id="panel-messages">
+        <p class="admin-hint">Danh sách khách hàng đã gửi form liên hệ trên trang chủ.</p>
+        <div class="admin-list" id="list-messages"></div>
+      </section>
+
+    </div>
+  </main>
+</div>
+
+<!-- Reusable confirm-delete modal -->
+<div id="confirm-modal" class="confirm-modal">
+  <div class="confirm-box">
+    <h4>Xác nhận xóa</h4>
+    <p id="confirm-text">Bạn có chắc chắn muốn xóa mục này? Hành động này không thể hoàn tác.</p>
+    <div class="confirm-actions">
+      <button class="btn btn-sm" id="confirm-cancel">Hủy</button>
+      <button class="btn btn-sm" style="background:var(--danger);color:#fff" id="confirm-ok">Xóa</button>
+    </div>
+  </div>
+</div>
+
+<!-- Generic modal for add/edit forms of list-based modules -->
+<div id="item-modal" class="confirm-modal">
+  <div class="confirm-box" style="width:min(520px,92vw);text-align:left">
+    <h4 id="item-modal-title">Thêm mục</h4>
+    <form id="item-modal-form"></form>
+  </div>
+</div>
+
+<!-- FIREBASE SDK (compat) -->
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+
+<script src="js/firebase-config.js"></script>
+<script src="js/admin-auth.js"></script>
+<script src="js/admin.js"></script>
+</body>
+</html>

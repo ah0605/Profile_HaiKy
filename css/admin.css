@@ -1,0 +1,114 @@
+/* ============================================================
+   ADMIN DASHBOARD STYLES
+   ============================================================ */
+.admin-body{background:var(--paper);min-height:100vh}
+
+/* ---------- LOGIN ---------- */
+.login-screen{
+  min-height:100vh;display:flex;align-items:center;justify-content:center;
+  background:radial-gradient(circle at 20% 20%, rgba(232,171,62,.12), transparent 45%), var(--navy-900);
+  padding:24px;
+}
+.login-card{
+  width:min(420px,100%);background:var(--white);border-radius:22px;padding:44px 38px;box-shadow:var(--shadow-lg);text-align:center;
+}
+.login-logo{font-family:var(--display);font-weight:800;font-size:24px;color:var(--navy-900);margin-bottom:10px}
+.login-logo span{color:var(--gold)}
+.login-sub{font-size:14px;margin-bottom:26px}
+.login-card .field{text-align:left}
+.login-back{display:inline-block;margin-top:18px;font-size:13.5px;color:var(--muted);font-family:var(--label)}
+.login-back:hover{color:var(--navy-900)}
+
+/* ---------- DASHBOARD SHELL ---------- */
+.dashboard{display:grid;grid-template-columns:260px 1fr;min-height:100vh}
+.admin-sidebar{
+  background:var(--navy-900);color:var(--white);padding:28px 18px;display:flex;flex-direction:column;gap:24px;
+  position:sticky;top:0;height:100vh;
+}
+.admin-logo{font-family:var(--display);font-weight:800;font-size:19px;padding:0 8px}
+.admin-logo span{color:var(--gold)}
+.admin-nav{display:flex;flex-direction:column;gap:2px;overflow-y:auto;flex:1}
+.admin-nav-btn{
+  text-align:left;padding:11px 14px;border-radius:10px;color:rgba(255,255,255,.65);
+  font-family:var(--label);font-size:14px;font-weight:500;transition:all .25s var(--ease);
+}
+.admin-nav-btn:hover{background:rgba(255,255,255,.06);color:var(--white)}
+.admin-nav-btn.active{background:var(--gold);color:var(--navy-900);font-weight:600}
+.admin-logout{
+  padding:12px;border-radius:10px;border:1px solid rgba(255,255,255,.2);color:rgba(255,255,255,.7);
+  font-family:var(--label);font-size:13.5px;transition:all .25s var(--ease);
+}
+.admin-logout:hover{background:var(--danger);border-color:var(--danger);color:#fff}
+
+.admin-main{display:flex;flex-direction:column;min-width:0}
+.admin-topbar{
+  background:var(--white);border-bottom:1px solid var(--line);padding:20px 32px;
+  display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:10;
+}
+.admin-topbar-title{font-family:var(--display);font-weight:800;font-size:20px;color:var(--navy-900)}
+.admin-topbar-sub{font-size:12.5px;color:var(--muted-2);font-family:var(--label)}
+.admin-content{padding:32px;flex:1}
+.admin-panel{display:none}
+.admin-panel.active{display:block;animation:fadein .35s var(--ease)}
+@keyframes fadein{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+
+.admin-hint{font-size:14px;color:var(--muted);background:var(--paper-dim);padding:14px 18px;border-radius:10px;margin-top:20px}
+.admin-panel-head{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-bottom:22px;flex-wrap:wrap}
+.admin-panel-head p{font-size:14px}
+
+/* ---------- FORMS ---------- */
+.admin-form{background:var(--white);border:1px solid var(--line);border-radius:var(--radius);padding:28px;max-width:760px}
+.upload-preview{margin-top:10px;display:flex;gap:10px;flex-wrap:wrap}
+.upload-preview img,.upload-preview video{width:110px;height:78px;object-fit:cover;border-radius:8px;border:1px solid var(--line)}
+
+/* ---------- STAT BOXES (dashboard home) ---------- */
+.admin-stat-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:18px}
+.admin-stat-box{background:var(--white);border:1px solid var(--line);border-radius:var(--radius);padding:24px;text-align:center}
+.asb-num{font-family:var(--display);font-size:32px;font-weight:800;color:var(--navy-900)}
+.asb-label{font-size:13px;color:var(--muted);font-family:var(--label);margin-top:6px}
+
+/* ---------- LIST (rows) ---------- */
+.admin-list{display:flex;flex-direction:column;gap:10px}
+.admin-row{
+  background:var(--white);border:1px solid var(--line);border-radius:12px;padding:14px 18px;
+  display:flex;align-items:center;gap:16px;justify-content:space-between;flex-wrap:wrap;
+}
+.admin-row-main{display:flex;align-items:center;gap:14px;min-width:0}
+.admin-row-thumb{width:52px;height:52px;border-radius:8px;object-fit:cover;background:var(--paper-dim);flex-shrink:0}
+.admin-row-title{font-weight:700;color:var(--navy-900);font-size:14.5px}
+.admin-row-sub{font-size:13px;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:420px}
+.admin-row-actions{display:flex;gap:8px;flex-shrink:0}
+.icon-btn{
+  width:34px;height:34px;border-radius:8px;display:flex;align-items:center;justify-content:center;
+  background:var(--paper);color:var(--navy-800);transition:all .25s var(--ease);
+}
+.icon-btn:hover{background:var(--gold);color:var(--navy-900)}
+.icon-btn.danger:hover{background:var(--danger);color:#fff}
+.icon-btn svg{width:16px;height:16px}
+.badge{font-family:var(--label);font-size:11px;padding:3px 9px;border-radius:100px;background:var(--paper-dim);color:var(--muted)}
+
+/* ---------- GRID LIST (gallery / partners thumbnails) ---------- */
+.admin-grid-list{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:16px}
+.admin-grid-item{background:var(--white);border:1px solid var(--line);border-radius:12px;overflow:hidden}
+.admin-grid-item img{width:100%;height:120px;object-fit:cover;background:var(--paper-dim)}
+.admin-grid-item .agi-body{padding:10px 12px}
+.admin-grid-item .agi-title{font-size:13px;font-weight:600;color:var(--navy-900);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.admin-grid-item .agi-actions{display:flex;gap:6px;margin-top:8px}
+
+/* ---------- MODALS ---------- */
+.confirm-modal{
+  position:fixed;inset:0;background:rgba(10,23,48,.55);display:none;align-items:center;justify-content:center;z-index:4000;padding:20px;
+}
+.confirm-modal.open{display:flex}
+.confirm-box{background:var(--white);border-radius:16px;padding:28px;width:min(400px,92vw);box-shadow:var(--shadow-lg)}
+.confirm-box h4{font-size:17px;color:var(--navy-900);margin-bottom:10px}
+.confirm-box p{font-size:14px;margin-bottom:20px}
+.confirm-actions{display:flex;justify-content:flex-end;gap:10px}
+
+/* ---------- RESPONSIVE ---------- */
+@media (max-width:900px){
+  .dashboard{grid-template-columns:1fr}
+  .admin-sidebar{position:relative;height:auto;flex-direction:row;flex-wrap:wrap;align-items:center}
+  .admin-nav{flex-direction:row;flex-wrap:wrap;overflow:visible}
+  .admin-stat-grid{grid-template-columns:repeat(2,1fr)}
+}
