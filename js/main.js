@@ -134,17 +134,10 @@ async function loadSiteConfig() {
   if (data.heroRole) safeText(document.getElementById('hero-role'), data.heroRole);
   if (data.heroTagline) safeText(document.getElementById('hero-tagline'), data.heroTagline);
   if (data.heroDesc) safeText(document.getElementById('hero-desc'), data.heroDesc);
-  if (data.heroAvatarUrl) {
-    const wrap = document.getElementById('hero-avatar');
-    wrap.innerHTML = `<img src="${escapeHtml(data.heroAvatarUrl)}" alt="Avatar">`;
-  }
   if (data.heroBackgroundUrl) {
-    const isVideo = /\.(mp4|webm|ogg)(\?|$)/i.test(data.heroBackgroundUrl);
-    const media = document.querySelector('.hero-media');
-    const bgEl = isVideo
-      ? `<video autoplay muted loop playsinline src="${escapeHtml(data.heroBackgroundUrl)}"></video>`
-      : `<img src="${escapeHtml(data.heroBackgroundUrl)}" alt="Banner">`;
-    media.insertAdjacentHTML('afterbegin', bgEl);
+    const img = document.getElementById("hero-bg-img");
+    img.src = data.heroBackgroundUrl;
+    img.style.display = "block";
   }
 }
 
@@ -482,6 +475,9 @@ async function loadContactInfo() {
 /* ============================================================
    CONTACT FORM — visitors can only CREATE (write-only) messages
    ============================================================ */
+/* Email dự phòng nếu mục Liên hệ trong Admin chưa được điền */
+const CONTACT_RECEIVER_EMAIL_FALLBACK = 'nhky3141999@gmail.com';
+
 function initContactForm() {
   const form = document.getElementById('contact-form');
   const msgEl = document.getElementById('contact-msg');
@@ -498,17 +494,33 @@ function initContactForm() {
       status: 'new'
     };
     btn.disabled = true;
-    btn.textContent = 'Đang gửi…';
+    btn.textContent = 'Đang xử lý…';
     msgEl.textContent = '';
     msgEl.className = 'form-msg';
     try {
+      // Lưu vào Firestore để hiện trong mục "Tin nhắn khách" ở trang Admin (dự phòng)
       await db.collection('contactMessages').add(payload);
-      msgEl.textContent = 'Đã gửi thành công! Cảm ơn bạn, tôi sẽ phản hồi sớm nhất.';
+
+      // Mở sẵn ứng dụng Email/Gmail của khách với nội dung điền sẵn
+      const contactEmailEl = document.querySelector('#contact-list [data-field="email"]');
+      const receiverEmail = (contactEmailEl && contactEmailEl.textContent !== '—')
+        ? contactEmailEl.textContent.trim()
+        : CONTACT_RECEIVER_EMAIL_FALLBACK;
+      const subject = `Liên hệ đặt lịch MC/HDV từ ${payload.name}`;
+      const body =
+        `Họ tên: ${payload.name}\n` +
+        `Số điện thoại: ${payload.phone}\n` +
+        `Email: ${payload.email}\n\n` +
+        `Nội dung:\n${payload.message}`;
+      const mailtoUrl = `mailto:${receiverEmail}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+      window.location.href = mailtoUrl;
+
+      msgEl.textContent = 'Ứng dụng Email của bạn sẽ mở ra — vui lòng bấm "Gửi" để hoàn tất liên hệ.';
       msgEl.classList.add('success');
       form.reset();
     } catch (err) {
       console.error(err);
-      msgEl.textContent = 'Gửi thất bại, vui lòng thử lại hoặc liên hệ trực tiếp qua điện thoại/email.';
+      msgEl.textContent = 'Có lỗi xảy ra, vui lòng thử lại hoặc liên hệ trực tiếp qua điện thoại/email.';
       msgEl.classList.add('error');
     } finally {
       btn.disabled = false;

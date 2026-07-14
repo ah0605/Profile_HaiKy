@@ -377,13 +377,10 @@ function initBannerForm() {
     document.getElementById('b-heroRole').value = d.heroRole || '';
     document.getElementById('b-heroTagline').value = d.heroTagline || '';
     document.getElementById('b-heroDesc').value = d.heroDesc || '';
-    document.getElementById('b-avatarFile').value = d.heroAvatarUrl || '';
     document.getElementById('b-bgFile').value = d.heroBackgroundUrl || '';
-    urlPreview(d.heroAvatarUrl, document.getElementById('b-avatarPreview'));
     urlPreview(d.heroBackgroundUrl, document.getElementById('b-bgPreview'), /\.(mp4|webm|ogg)(\?|$)/i.test(d.heroBackgroundUrl || ''));
   }).catch(console.warn);
 
-  document.getElementById('b-avatarFile').addEventListener('input', e => urlPreview(e.target.value.trim(), document.getElementById('b-avatarPreview')));
   document.getElementById('b-bgFile').addEventListener('input', e => {
     const v = e.target.value.trim();
     urlPreview(v, document.getElementById('b-bgPreview'), /\.(mp4|webm|ogg)(\?|$)/i.test(v));
@@ -398,7 +395,6 @@ function initBannerForm() {
         heroRole: document.getElementById('b-heroRole').value.trim(),
         heroTagline: document.getElementById('b-heroTagline').value.trim(),
         heroDesc: document.getElementById('b-heroDesc').value.trim(),
-        heroAvatarUrl: document.getElementById('b-avatarFile').value.trim(),
         heroBackgroundUrl: document.getElementById('b-bgFile').value.trim()
       };
       await db.doc('config/site').set(data, { merge: true });
