@@ -27,7 +27,6 @@
       <a href="#gallery">Hình ảnh</a>
       <a href="#videos">Video</a>
       <a href="#services">Dịch vụ</a>
-      <a href="#partners">Đối tác</a>
       <a href="#contact">Liên hệ</a>
       <a href="admin.html" class="nav-admin-btn">Admin</a>
     </nav>
@@ -35,12 +34,11 @@
   </div>
 </header>
 
-<!-- HERO -->
+<!-- HERO (chỉ hiển thị ảnh/video, không phủ chữ) -->
 <section id="hero">
   <div class="hero-media">
     <img id="hero-bg-img" src="" alt="" style="display:none">
   </div>
-  <div class="hero-scroll"><span>Scroll</span><span class="line"></span></div>
 </section>
 
 <!-- ABOUT -->
@@ -227,44 +225,6 @@
     <div class="guide-card-row"><span>Mã số</span><span class="gc-code">—</span></div>
     <div class="guide-card-row"><span>Ngày cấp</span><span class="gc-issueDate">—</span></div>
     <div class="guide-card-row"><span>Đơn vị cấp</span><span class="gc-issuer">—</span></div>
-  </div>
-</template>
-
-<!-- ĐỐI TÁC -->
-<section id="partners">
-  <div class="container">
-    <div class="section-head center reveal">
-      <div class="eyebrow" style="justify-content:center">Đối tác</div>
-      <h2>Tin tưởng đồng hành</h2>
-    </div>
-  </div>
-  <div class="partners-track-wrap reveal">
-    <div class="partners-track" id="partners-track">
-      <div class="empty-state" style="min-width:100%">Chưa có đối tác nào — vui lòng cập nhật trong trang Admin.</div>
-    </div>
-  </div>
-</section>
-
-<!-- ĐÁNH GIÁ -->
-<section class="bg-paper" id="testimonials">
-  <div class="container">
-    <div class="section-head center reveal">
-      <div class="eyebrow" style="justify-content:center">Đánh giá</div>
-      <h2>Khách hàng nói gì</h2>
-    </div>
-    <div class="testi-grid reveal-stagger" id="testi-grid">
-      <div class="empty-state" style="grid-column:1/-1">Chưa có đánh giá nào.</div>
-    </div>
-  </div>
-</section>
-<template id="tpl-testi-card">
-  <div class="testi-card">
-    <div class="testi-stars"></div>
-    <p class="testi-content"></p>
-    <div class="testi-person">
-      <div class="testi-avatar"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--muted-2)" stroke-width="1.5"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4.4 3.6-8 8-8s8 3.6 8 8"/></svg></div>
-      <div class="testi-name"></div>
-    </div>
   </div>
 </template>
 

@@ -41,8 +41,6 @@
       <button class="admin-nav-btn" data-panel="panel-videos">Video</button>
       <button class="admin-nav-btn" data-panel="panel-services">Dịch vụ</button>
       <button class="admin-nav-btn" data-panel="panel-guidecard">Thẻ hướng dẫn</button>
-      <button class="admin-nav-btn" data-panel="panel-partners">Đối tác</button>
-      <button class="admin-nav-btn" data-panel="panel-testimonials">Đánh giá</button>
       <button class="admin-nav-btn" data-panel="panel-contact">Liên hệ</button>
       <button class="admin-nav-btn" data-panel="panel-messages">Tin nhắn khách</button>
     </nav>
@@ -65,7 +63,6 @@
         <div class="admin-stat-grid">
           <div class="admin-stat-box"><div class="asb-num" id="count-gallery">0</div><div class="asb-label">Tổng số ảnh</div></div>
           <div class="admin-stat-box"><div class="asb-num" id="count-videos">0</div><div class="asb-label">Tổng số video</div></div>
-          <div class="admin-stat-box"><div class="asb-num" id="count-partners">0</div><div class="asb-label">Tổng số đối tác</div></div>
           <div class="admin-stat-box"><div class="asb-num" id="count-services">0</div><div class="asb-label">Tổng số dịch vụ</div></div>
           <div class="admin-stat-box"><div class="asb-num" id="count-messages">0</div><div class="asb-label">Tin nhắn liên hệ</div></div>
         </div>
@@ -80,12 +77,7 @@
       <!-- BANNER -->
       <section class="admin-panel" id="panel-banner">
         <form class="admin-form" id="form-banner">
-          <div class="form-row">
-            <div class="field"><label>Tên MC hiển thị ở Banner</label><input type="text" id="b-heroName"></div>
-            <div class="field"><label>Nghề nghiệp / vai trò</label><input type="text" id="b-heroRole" placeholder="MC - HƯỚNG DẪN VIÊN"></div>
-          </div>
-          <div class="field"><label>Câu slogan (tagline)</label><input type="text" id="b-heroTagline" placeholder="Năng động • Chuyên nghiệp • Truyền cảm hứng"></div>
-          <div class="field"><label>Mô tả ngắn</label><textarea id="b-heroDesc"></textarea></div>
+          <p class="admin-hint" style="margin-top:0;margin-bottom:20px">Banner trang chủ chỉ hiển thị ảnh hoặc video toàn màn hình — không có chữ hay nút đè lên. Dán link ảnh hoặc video bên dưới.</p>
           <div class="field"><label>Link ảnh/video nền Banner (toàn màn hình)</label><input type="url" id="b-bgFile" placeholder="https://res.cloudinary.com/..."><div class="upload-preview" id="b-bgPreview"></div></div>
           <button type="submit" class="btn btn-primary">Lưu Banner</button>
           <div class="form-msg" id="b-msg"></div>
@@ -176,24 +168,6 @@
           <button class="btn btn-primary btn-sm" id="btn-add-guidecard">+ Thêm thẻ</button>
         </div>
         <div class="admin-list" id="list-guidecards"></div>
-      </section>
-
-      <!-- PARTNERS -->
-      <section class="admin-panel" id="panel-partners">
-        <div class="admin-panel-head">
-          <p>Dán link logo (từ Cloudinary/ImgBB...), hiển thị dạng slider tự chạy ở trang chủ.</p>
-          <button class="btn btn-primary btn-sm" id="btn-add-partner">+ Thêm đối tác</button>
-        </div>
-        <div class="admin-grid-list" id="list-partners"></div>
-      </section>
-
-      <!-- TESTIMONIALS -->
-      <section class="admin-panel" id="panel-testimonials">
-        <div class="admin-panel-head">
-          <p>Đánh giá / phản hồi từ khách hàng.</p>
-          <button class="btn btn-primary btn-sm" id="btn-add-testi">+ Thêm đánh giá</button>
-        </div>
-        <div class="admin-list" id="list-testimonials"></div>
       </section>
 
       <!-- CONTACT -->

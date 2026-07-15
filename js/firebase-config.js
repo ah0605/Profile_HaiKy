@@ -18,6 +18,7 @@ const firebaseConfig = {
   measurementId: "G-VKERVPNL3L"
 };
 
+
 /* Email duy nhất được phép đăng nhập & chỉnh sửa dữ liệu.
    Phải khớp với email bạn tạo trong Firebase Authentication
    và với luật bảo mật (security rules) trong README.md */

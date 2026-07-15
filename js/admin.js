@@ -3,7 +3,7 @@
    Toàn bộ logic quản trị: điều hướng sidebar, các form đơn
    (Banner/Giới thiệu/Thẻ HDV/Liên hệ) và module CRUD dùng chung
    cho các collection dạng danh sách (số liệu, phong cách, điểm
-   mạnh, hình ảnh, video, dịch vụ, đối tác, đánh giá).
+   mạnh, hình ảnh, video, dịch vụ).
    ============================================================ */
 
 window.onAdminReady = function () {
@@ -18,8 +18,6 @@ window.onAdminReady = function () {
   initServicesModule();
   initGalleryModule();
   initVideosModule();
-  initPartnersModule();
-  initTestimonialsModule();
   initMessagesModule();
   initGuideCardsModule();
   initSeedButton();
@@ -61,7 +59,6 @@ async function loadDashboardCounts() {
   const targets = [
     ['gallery', 'count-gallery'],
     ['videos', 'count-videos'],
-    ['partners', 'count-partners'],
     ['services', 'count-services'],
     ['contactMessages', 'count-messages']
   ];
@@ -264,7 +261,7 @@ function initStatsModule() {
     titleKey: 'label', subValue: i => `${i.target}+`,
     modalTitleAdd: 'Thêm số liệu', modalTitleEdit: 'Sửa số liệu',
     fields: [
-      { key: 'label', label: 'Nhãn (VD: chương trình, khách hàng, đối tác)', type: 'text', required: true },
+      { key: 'label', label: 'Nhãn (VD: chương trình, khách hàng, tỉnh thành)', type: 'text', required: true },
       { key: 'target', label: 'Số đích (VD: 350)', type: 'number', min: 0, required: true }
     ]
   });
@@ -339,31 +336,6 @@ function initVideosModule() {
     ]
   });
 }
-function initPartnersModule() {
-  createListModule({
-    collectionName: 'partners', containerId: 'list-partners', addBtnId: 'btn-add-partner',
-    gridMode: true, titleKey: 'name', thumbKey: 'logoUrl',
-    modalTitleAdd: 'Thêm đối tác', modalTitleEdit: 'Sửa đối tác',
-    fields: [
-      { key: 'logoUrl', label: 'Link logo (Cloudinary/ImgBB...)', type: 'url', required: true },
-      { key: 'name', label: 'Tên đối tác', type: 'text', required: true }
-    ]
-  });
-}
-function initTestimonialsModule() {
-  createListModule({
-    collectionName: 'testimonials', containerId: 'list-testimonials', addBtnId: 'btn-add-testi',
-    titleKey: 'name', thumbKey: 'avatarUrl', subValue: i => `${'★'.repeat(i.rating || 5)} — ${i.content || ''}`,
-    modalTitleAdd: 'Thêm đánh giá', modalTitleEdit: 'Sửa đánh giá',
-    fields: [
-      { key: 'name', label: 'Tên khách hàng', type: 'text', required: true },
-      { key: 'avatarUrl', label: 'Link ảnh đại diện (tùy chọn)', type: 'url' },
-      { key: 'content', label: 'Nội dung đánh giá', type: 'textarea', required: true },
-      { key: 'rating', label: 'Số sao (1-5)', type: 'number', min: 1, max: 5, default: 5 }
-    ]
-  });
-}
-
 /* ============================================================
    SINGLETON FORMS: Banner / About / Guide Card / Contact
    ============================================================ */
@@ -373,10 +345,6 @@ function initBannerForm() {
   db.doc('config/site').get().then(snap => {
     if (!snap.exists) return;
     const d = snap.data();
-    document.getElementById('b-heroName').value = d.heroName || '';
-    document.getElementById('b-heroRole').value = d.heroRole || '';
-    document.getElementById('b-heroTagline').value = d.heroTagline || '';
-    document.getElementById('b-heroDesc').value = d.heroDesc || '';
     document.getElementById('b-bgFile').value = d.heroBackgroundUrl || '';
     urlPreview(d.heroBackgroundUrl, document.getElementById('b-bgPreview'), /\.(mp4|webm|ogg)(\?|$)/i.test(d.heroBackgroundUrl || ''));
   }).catch(console.warn);
@@ -391,10 +359,6 @@ function initBannerForm() {
     setFormMsg(msgEl, 'Đang lưu…');
     try {
       const data = {
-        heroName: document.getElementById('b-heroName').value.trim(),
-        heroRole: document.getElementById('b-heroRole').value.trim(),
-        heroTagline: document.getElementById('b-heroTagline').value.trim(),
-        heroDesc: document.getElementById('b-heroDesc').value.trim(),
         heroBackgroundUrl: document.getElementById('b-bgFile').value.trim()
       };
       await db.doc('config/site').set(data, { merge: true });
@@ -525,13 +489,6 @@ async function seedInitialData() {
   const msgEl = document.getElementById('seed-msg');
   setFormMsg(msgEl, 'Đang nhập dữ liệu mẫu…');
   try {
-    await seedSingletonDoc('config/site', {
-      heroName: 'Hải Kỳ',
-      heroRole: 'MC - HƯỚNG DẪN VIÊN',
-      heroTagline: 'Hòa nhã · Truyền cảm · Chuyên nghiệp',
-      heroDesc: 'Đồng hành cùng các chương trình Gala Dinner, Team Building, Lửa trại và Tour trong nước, quốc tế.'
-    });
-
     await seedSingletonDoc('config/about', {
       fullName: 'Hải Kỳ',
       headline: 'Người truyền năng lượng cho mọi sân khấu',

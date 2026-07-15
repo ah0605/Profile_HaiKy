@@ -24,8 +24,6 @@ document.addEventListener('DOMContentLoaded', () => {
   loadVideos();
   loadServices();
   loadGuideCards();
-  loadPartners();
-  loadTestimonials();
   loadContactInfo();
 });
 
@@ -125,20 +123,17 @@ function animateCounter(el, target) {
 }
 
 /* ============================================================
-   SITE CONFIG / BANNER  (doc: config/site)
+   SITE CONFIG / BANNER (doc: config/site) — chỉ ảnh/video toàn màn hình
    ============================================================ */
 async function loadSiteConfig() {
   const data = await safeGetDoc('config/site');
-  if (!data) return;
-  if (data.heroName) safeText(document.getElementById('hero-name'), data.heroName);
-  if (data.heroRole) safeText(document.getElementById('hero-role'), data.heroRole);
-  if (data.heroTagline) safeText(document.getElementById('hero-tagline'), data.heroTagline);
-  if (data.heroDesc) safeText(document.getElementById('hero-desc'), data.heroDesc);
-  if (data.heroBackgroundUrl) {
-    const img = document.getElementById("hero-bg-img");
-    img.src = data.heroBackgroundUrl;
-    img.style.display = "block";
-  }
+  if (!data || !data.heroBackgroundUrl) return;
+  const isVideo = /\.(mp4|webm|ogg)(\?|$)/i.test(data.heroBackgroundUrl);
+  const media = document.querySelector('.hero-media');
+  const bgEl = isVideo
+    ? `<video autoplay muted loop playsinline src="${escapeHtml(data.heroBackgroundUrl)}"></video>`
+    : `<img src="${escapeHtml(data.heroBackgroundUrl)}" alt="Banner">`;
+  media.insertAdjacentHTML('afterbegin', bgEl);
 }
 
 /* ============================================================
@@ -409,46 +404,6 @@ async function loadGuideCards() {
     }
     wrap.appendChild(node);
   });
-}
-
-/* ============================================================
-   PARTNERS (collection: partners) doc: {name, logoUrl, order}
-   ============================================================ */
-async function loadPartners() {
-  const items = await safeGetCollection('partners', 'order');
-  const track = document.getElementById('partners-track');
-  if (!items.length) {
-    track.innerHTML = '<div class="empty-state" style="min-width:100%">Chưa có đối tác nào — vui lòng cập nhật trong trang Admin.</div>';
-    return;
-  }
-  const logos = items.map(p => `<div class="partner-logo"><img src="${escapeHtml(p.logoUrl)}" alt="${escapeHtml(p.name || '')}" loading="lazy"></div>`).join('');
-  // duplicate the set for seamless marquee loop
-  track.innerHTML = logos + logos;
-}
-
-/* ============================================================
-   TESTIMONIALS (collection: testimonials) doc: {name, avatarUrl, content, rating, order}
-   ============================================================ */
-async function loadTestimonials() {
-  const items = await safeGetCollection('testimonials', 'order');
-  const grid = document.getElementById('testi-grid');
-  if (!items.length) {
-    grid.innerHTML = '<div class="empty-state" style="grid-column:1/-1">Chưa có đánh giá nào.</div>';
-    return;
-  }
-  const tpl = document.getElementById('tpl-testi-card');
-  grid.innerHTML = '';
-  items.forEach(item => {
-    const node = tpl.content.cloneNode(true);
-    const rating = Math.max(0, Math.min(5, Number(item.rating) || 5));
-    node.querySelector('.testi-stars').textContent = '★★★★★'.slice(0, rating) + '☆☆☆☆☆'.slice(0, 5 - rating);
-    node.querySelector('.testi-content').textContent = item.content || '';
-    node.querySelector('.testi-name').textContent = item.name || '';
-    if (item.avatarUrl) node.querySelector('.testi-avatar').innerHTML = `<img src="${escapeHtml(item.avatarUrl)}" alt="${escapeHtml(item.name || '')}">`;
-    grid.appendChild(node);
-  });
-  grid.classList.add('reveal-stagger');
-  if (window._observeReveal) window._observeReveal(grid);
 }
 
 /* ============================================================
