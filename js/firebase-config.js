@@ -33,4 +33,4 @@ const auth = firebase.auth();
    không, khác với mailto:). Lấy Access Key miễn phí tại
    https://web3forms.com — xem hướng dẫn trong README.md
    ============================================================ */
-const WEB3FORMS_ACCESS_KEY = "YOUR_WEB3FORMS_ACCESS_KEY";
+const WEB3FORMS_ACCESS_KEY = "ab105ebf-c510-4433-bac5-07cbd8ca90e8";
