@@ -169,48 +169,17 @@ section{padding:104px 0}
 
 /* ============ HERO (chỉ ảnh/video toàn màn hình, không overlay/chữ) ============ */
 #hero{
-  position: relative;
-  background: var(--navy-900);
-  overflow: hidden;
+  position:relative;
+  height:100vh;height:100svh;
+  background:var(--navy-900);overflow:hidden;
 }
-
-.hero-media{
-  position: relative;
-  width: 100%;
+.hero-media{position:absolute;inset:0}
+.hero-media img, .hero-media video{width:100%;height:100%;object-fit:cover}
+@media (max-width:860px){
+  #hero{height:56vh;height:56svh;min-height:320px}
 }
-
-.hero-media img,
-.hero-media video{
-  display: block;
-  width: 100%;
-  height: auto;
-}
-
-/* Desktop */
-@media (min-width: 861px){
-  .hero-media img,
-  .hero-media video{
-    width: 100%;
-    height: auto;
-  }
-}
-
-/* Tablet & Mobile */
-@media (max-width: 860px){
-  .hero-media img,
-  .hero-media video{
-    width: 100%;
-    height: auto;
-  }
-}
-
-/* Mobile nhỏ */
-@media (max-width: 420px){
-  .hero-media img,
-  .hero-media video{
-    width: 100%;
-    height: auto;
-  }
+@media (max-width:420px){
+  #hero{height:46vh;height:46svh;min-height:260px}
 }
 /* ============ ABOUT ============ */
 .about-grid{display:grid;grid-template-columns:340px 1fr;gap:64px;align-items:start}
