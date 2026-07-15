@@ -440,37 +440,52 @@ function initContactForm() {
   form.addEventListener('submit', async (e) => {
     e.preventDefault();
     const fd = new FormData(form);
-    const payload = {
-      name: fd.get('name').trim(),
-      phone: fd.get('phone').trim(),
-      email: fd.get('email').trim(),
-      message: fd.get('message').trim(),
-      createdAt: firebase.firestore.FieldValue.serverTimestamp(),
-      status: 'new'
-    };
+    const name = fd.get('name').trim();
+    const phone = fd.get('phone').trim();
+    const email = fd.get('email').trim();
+    const message = fd.get('message').trim();
+
     btn.disabled = true;
-    btn.textContent = 'Đang xử lý…';
+    btn.textContent = 'Đang gửi…';
     msgEl.textContent = '';
     msgEl.className = 'form-msg';
+
+    // Email người nhận: lấy từ mục Liên hệ trong Admin, nếu chưa có thì dùng email dự phòng
+    const contactEmailEl = document.querySelector('#contact-list [data-field="email"]');
+    const receiverEmail = (contactEmailEl && contactEmailEl.textContent !== '—')
+      ? contactEmailEl.textContent.trim()
+      : CONTACT_RECEIVER_EMAIL_FALLBACK;
+
     try {
-      // Lưu vào Firestore để hiện trong mục "Tin nhắn khách" ở trang Admin (dự phòng)
-      await db.collection('contactMessages').add(payload);
+      // Gửi email thật qua Web3Forms (không cần khách có sẵn app Email)
+      const res = await fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+        body: JSON.stringify({
+          access_key: WEB3FORMS_ACCESS_KEY,
+          subject: `Liên hệ đặt lịch MC/HDV từ ${name}`,
+          from_name: name,
+          email: email,
+          phone: phone,
+          message: message,
+          to: receiverEmail
+        })
+      });
+      const result = await res.json();
+      if (!result.success) throw new Error(result.message || 'Web3Forms error');
 
-      // Mở sẵn ứng dụng Email/Gmail của khách với nội dung điền sẵn
-      const contactEmailEl = document.querySelector('#contact-list [data-field="email"]');
-      const receiverEmail = (contactEmailEl && contactEmailEl.textContent !== '—')
-        ? contactEmailEl.textContent.trim()
-        : CONTACT_RECEIVER_EMAIL_FALLBACK;
-      const subject = `Liên hệ đặt lịch MC/HDV từ ${payload.name}`;
-      const body =
-        `Họ tên: ${payload.name}\n` +
-        `Số điện thoại: ${payload.phone}\n` +
-        `Email: ${payload.email}\n\n` +
-        `Nội dung:\n${payload.message}`;
-      const mailtoUrl = `mailto:${receiverEmail}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-      window.location.href = mailtoUrl;
+      // Lưu thêm vào Firestore để hiện trong mục "Tin nhắn khách" ở trang Admin (dự phòng/lưu trữ)
+      try {
+        await db.collection('contactMessages').add({
+          name, phone, email, message,
+          createdAt: firebase.firestore.FieldValue.serverTimestamp(),
+          status: 'new'
+        });
+      } catch (fsErr) {
+        console.error('Firestore lưu thất bại (không ảnh hưởng email đã gửi):', fsErr);
+      }
 
-      msgEl.textContent = 'Ứng dụng Email của bạn sẽ mở ra — vui lòng bấm "Gửi" để hoàn tất liên hệ.';
+      msgEl.textContent = 'Gửi thành công! Cảm ơn bạn, mình sẽ phản hồi sớm nhất có thể.';
       msgEl.classList.add('success');
       form.reset();
     } catch (err) {
