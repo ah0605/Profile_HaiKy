@@ -167,20 +167,16 @@ section{padding:104px 0}
 .btn-dark:hover{background:var(--navy-700);transform:translateY(-3px)}
 .btn-sm{padding:9px 18px;font-size:13px}
 
-/* ============ HERO (chỉ ảnh/video toàn màn hình, không overlay/chữ) ============ */
+/* ============ HERO (chỉ ảnh/video, giữ nguyên tỉ lệ 16:9, không cắt ảnh) ============ */
 #hero{
   position:relative;
-  height:100vh;height:100svh;
+  width:100%;
+  aspect-ratio:16/9;
   background:var(--navy-900);overflow:hidden;
 }
 .hero-media{position:absolute;inset:0}
-.hero-media img, .hero-media video{width:100%;height:100%;object-fit:cover}
-@media (max-width:860px){
-  #hero{height:56vh;height:56svh;min-height:320px}
-}
-@media (max-width:420px){
-  #hero{height:46vh;height:46svh;min-height:260px}
-}
+.hero-media img, .hero-media video{width:100%;height:100%;object-fit:contain;background:var(--navy-900)}
+
 /* ============ ABOUT ============ */
 .about-grid{display:grid;grid-template-columns:340px 1fr;gap:64px;align-items:start}
 .about-avatar-wrap{width:280px;height:280px;margin:0 auto}
