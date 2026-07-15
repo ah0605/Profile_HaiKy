@@ -18,7 +18,6 @@ const firebaseConfig = {
   measurementId: "G-VKERVPNL3L"
 };
 
-
 /* Email duy nhất được phép đăng nhập & chỉnh sửa dữ liệu.
    Phải khớp với email bạn tạo trong Firebase Authentication
    và với luật bảo mật (security rules) trong README.md */
@@ -27,3 +26,11 @@ const ADMIN_EMAIL = "anhhau0526@gmail.com";
 firebase.initializeApp(firebaseConfig);
 const db = firebase.firestore();
 const auth = firebase.auth();
+
+/* ============================================================
+   WEB3FORMS CONFIG — gửi email thật tới hộp thư khi khách điền
+   form Liên hệ (không phụ thuộc máy khách có cài app Email hay
+   không, khác với mailto:). Lấy Access Key miễn phí tại
+   https://web3forms.com — xem hướng dẫn trong README.md
+   ============================================================ */
+const WEB3FORMS_ACCESS_KEY = "YOUR_WEB3FORMS_ACCESS_KEY";
